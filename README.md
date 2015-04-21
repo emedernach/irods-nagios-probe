@@ -14,11 +14,15 @@ For each ressources:
 
 - iphc_check_irods_iput.sh
 
-Example:  iphc_check_irods_iput.sh -R <resource> 
+Example:  iphc_check_irods_iput.sh -R <resource> -d <destination>
 
 Check file copy 
 
 - iphc_check_irods_iget.sh
 
-Example:  iphc_check_irods_iget.sh -R <resource> 
+Example:  iphc_check_irods_iget.sh -R <resource> -d <destination>
+
+- iphc_check_irods_irm.sh
+
+Example:  iphc_check_irods_irm.sh -R <resource> -d <destination>
 
