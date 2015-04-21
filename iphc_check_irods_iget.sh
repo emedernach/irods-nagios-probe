@@ -34,7 +34,8 @@ print_help() {
     echo "Command : $PROGNAME"
     echo $HELP
     echo
-    echo "Usage: $PROGNAME [-R <resource>] -d <destination>"
+    echo "Usage: $PROGNAME -R <resource> -d <destination>"
+    echo "<destination> is an IRODS directory"
 }
 
 get_file() {

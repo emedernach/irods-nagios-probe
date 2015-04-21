@@ -2,14 +2,14 @@
 
 ##############################################################################  
 #                                                                               
-# Name      : iphc_check_irods_iput.sh 
+# Name      : iphc_check_irods_irm.sh 
 # Author    : Emmanuel Medernach
 #                                                                               
 # Parameters: --help                                                            
 #             --version                                                         
 ##############################################################################  
 
-HELP="This script is used by Nagios to check transfert of files"
+HELP="This script is used by Nagios to check deletion of IRODS files"
 
 # Initialisation                                                                
 NVERSION=0.1
@@ -38,10 +38,15 @@ print_help() {
     echo "<destination> is an IRODS directory"
 }
 
-put_file() {
-    FILE="$DIR/DATE.$RESOURCE"
-    [ -f $FILE ] || ( date > $FILE )
-    iput -R $RESOURCE -f $FILE $DESTINATION 2>&1 || exit $STATE_CRITICAL
+delete_file() {
+    if [ -z $DESTINATION ]
+    then
+        FILE="DATE.$RESOURCE"
+    else
+        FILE="$DESTINATION/DATE.$RESOURCE"
+    fi
+    ils $FILE > /dev/null || exit $STATE_WARNING 
+    irm -f $FILE 2>&1 || exit $STATE_CRITICAL
 }
 
 DESTINATION=""
@@ -89,7 +94,7 @@ then
     exit $STATE_WARNING
 fi
 
-put_file
+delete_file
 echo Ok
 exit $STATE_OK
 
